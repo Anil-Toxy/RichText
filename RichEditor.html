@@ -1,0 +1,478 @@
+<!-- Place this tag in your head or just before your close body tag. -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+              <span>Rich<span style="color: #f97402;font-weight:bold;"> Text </span>Editor</span>
+            </a>
+          </div>
+          <ul class="nav navbar-nav navbar-right text-center">
+                        <li style="padding: 15px 15px"><a class="github-button" href="https://github.com/Anil-Toxy" aria-label="Follow @Anil-Toxy on GitHub">Follow @Anil-Toxy</a></li>
+                       
+          </ul>
+        </div>
+      </nav>
+<div class="Toxy-TextEditor">
+    <div class="wrap">
+        <div class="col-sm-12 toolbar">
+                <div class="col-sm-3  col-xs-3  align-toolbar">
+                        <p class="sub-heading">Tools</p>
+                        <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Select All" onclick="getHTMLFromContext()"><i class="glyphicon glyphicon-console"></i></span>
+                        <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Select All" onclick="doThis.call(this,'selectAll')"><i class="glyphicon glyphicon-resize-full"></i></span>
+                        <span class="btn btn-outline-dark" data-toggle="tooltip" title="Remove Format!"  onclick="doThis.call(this,'removeFormat')"><i class="glyphicon glyphicon-log-out"></i></span>
+                        <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Copy" onclick="doThis.call(this,'copy')"><i class="glyphicon glyphicon-copy"></i></span>
+                        <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Cut" onclick="doThis.call(this,'cut')"><i class="glyphicon glyphicon-scissors"></i></span>
+                        <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Paste" onclick="doThis.call(this,'paste')"><i class="glyphicon glyphicon-paste"></i></span>
+                        <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Delete" onclick="doThis('delete')"><i class="glyphicon glyphicon-trash"></i></span>
+                </div>
+                <div class="col-sm-3 col-xs-3 align-toolbar">
+                                <p class="sub-heading">Allignment</p>
+                                <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Justify Left"  onclick="doThis.call(this,'justifyleft')"><i class="glyphicon glyphicon-align-left"></i></span>
+                                <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Justify Center"  onclick="doThis.call(this,'justifycenter')"><i class="glyphicon glyphicon-align-center"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Justify Right"  onclick="doThis.call(this,'justifyright')"><i class="glyphicon glyphicon-align-right"></i></span>
+                                <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Insert Hr / Line"  onclick="doThis.call(this,'insertHorizontalRule')">&#9473;</span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Insert Break"  onclick="doThis.call(this,'insertBrOnReturn')">&#8629;</span>
+                </div>
+                <div class="col-sm-4 col-xs-4 align-toolbar">
+                                <p class="sub-heading">Text Styles</p>
+                                <span class="btn btn-outline-dark"  data-toggle="tooltip" title="Bold"  onclick="doThis.call(this,'bold')"><i class="glyphicon glyphicon-bold"></i></span>
+                                <span class="btn btn-outline-dark"  data-toggle="modal" data-target="#InsertHyperLink"><i class="glyphicon glyphicon-link"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Italic"  onclick="doThis.call(this,'italic')"><i class="glyphicon glyphicon-italic"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Strike Through"  onclick="doThis.call(this,'strikeThrough')">&#8371;</span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Underline"  onclick="doThis.call(this,'underline')"><i class="glyphicon glyphicon-minus"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Superscript"  onclick="doThis.call(this,'superscript')"><i class="glyphicon glyphicon-superscript"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Subscript"  onclick="doThis.call(this,'subscript')"><i class="glyphicon glyphicon-subscript"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Quote!"  onclick="doThis.call(this,'formatblock','blockquote')"><i class="glyphicon glyphicon-asterisk"></i></span>
+                </div>
+                <div class="col-sm-2  col-xs-2 align-toolbar">
+                                <p class="sub-heading">Text Formats</p>
+                                <div class="btn select-div"  data-toggle="tooltip" title="Headings (h1..h2..etc)" >
+                                        <span id="before-select"><i class="glyphicon glyphicon-header"></i></span>
+                                        <select class="btn-select" onchange="doThis.('formatblock',this[this.selectedIndex].value);this.selectedIndex=0;">
+                                                <option selected> </option>
+                                                <option value="h1">Title 1 &lt;h1&gt;</option>
+                                                <option value="h2">Title 2 &lt;h2&gt;</option>
+                                                <option value="h3">Title 3 &lt;h3&gt;</option>
+                                                <option value="h4">Title 4 &lt;h4&gt;</option>
+                                                <option value="h5">Title 5 &lt;h5&gt;</option>
+                                                <option value="h6">Subtitle &lt;h6&gt;</option>
+                                                <option value="p">Paragraph &lt;p&gt;</option>
+                                                <option value="pre">Preformatted &lt;pre&gt;</option>
+                                        </select>
+                                </div>
+                                <div class="btn select-div"  data-toggle="tooltip" title="Font Style" >
+                                        <span id="btn-select"><i class="glyphicon glyphicon-font"></i></span>
+                                        <select class="btn-select" onchange="doThis('fontname',this[this.selectedIndex].value);this.selectedIndex=0;">
+                                                <option class="heading" selected> </option>
+                                                <option>Arial</option>
+                                                <option>Arial Black</option>
+                                                <option>Courier New</option>
+                                                <option>Times New Roman</option>
+                                        </select>
+                                </div>
+                                <div class="btn select-div" data-toggle="tooltip" title="Font Size" >
+                                        <span id="before-select"><i class="glyphicon glyphicon-text-size"></i></span>
+                                        <select class="btn-select" onchange="doThis('fontsize',this[this.selectedIndex].value);this.selectedIndex=0;">
+                                                <option class="heading" selected> </option>
+                                                <option value="1">Very small</option>
+                                                <option value="2">A bit small</option>
+                                                <option value="3">Normal</option>
+                                                <option value="4">Medium-large</option>
+                                                <option value="5">Big</option>
+                                                <option value="6">Very big</option>
+                                                <option value="7">Maximum</option>
+                                        </select>
+                                </div>
+                               
+               </div>
+        </div>
+        <div class="col-sm-12 toolbar">
+                
+                <div class="col-sm-1 col-xs-1 align-toolbar">
+                                <p class="sub-heading">Disable</p>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Redo"  onclick="toggoleDisable()"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                </div>
+                <div class="col-sm-2 col-xs-2 align-toolbar">
+                                <p class="sub-heading">Redo / Undo</p>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Redo"  onclick="doThis.call(this,'redo')"><i class="glyphicon glyphicon-repeat"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Undo"  onclick="doThis.call(this,'undo')"><i class="glyphicon glyphicon-refresh"></i></span>
+                </div>
+                
+                <div class="col-sm-3 col-xs-3 align-toolbar">
+                                <p class="sub-heading">List / Indent</p>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Order List"  onclick="doThis.call(this,'insertorderedlist')"><i class="glyphicon glyphicon-align-justify"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Unordered List"  onclick="doThis.call(this,'insertunorderedlist')"><i class="glyphicon glyphicon-list"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Intent"  onclick="doThis.call(this,'indent')"><i class="glyphicon glyphicon-indent-left"></i></span>
+                                <span class="btn btn-outline-dark" data-toggle="tooltip" title="Outdent"  onclick="doThis.call(this,'outdent')"><i class="glyphicon glyphicon-indent-right"></i></span>
+                </div>
+               
+                <div class="col-sm-2 col-xs-2 align-toolbar">
+                                <p class="sub-heading">Media</p>
+                                <span class="btn btn-outline-dark"   data-toggle="modal" data-target="#InsertPic"><i class="glyphicon glyphicon-picture"></i></span>
+                                <span class="btn btn-outline-dark"   data-toggle="modal" data-target="#InsertVideo"><i class="glyphicon glyphicon-expand"></i></span>
+                </div>
+                
+                <div class="col-sm-2 col-xs-2 align-toolbar">
+                                <p class="sub-heading">Colors</p>
+                                <input class="jscolor btn btn-outline-dark" data-toggle="tooltip" title="Font Color"     onchange="setColor('forecolor',this.value)"  value="000000">
+                                <input class=" jscolor btn btn-outline-dark" data-toggle="tooltip" title="Backround Color"  onchange="setColor('hiliteColor',this.value)" value="FFFFFF">
+                                
+                </div>
+               
+        </div>
+        <div class="col-sm-12 text-area" id="textArea" >
+
+        </div>
+    </div>
+
+        <!-- Hyperlink Modal -->
+        <div class="modal fade" id="InsertHyperLink" role="dialog">
+                <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Hyperlink</h4>
+                </div>
+                <div class="modal-body">
+                        <div class="form-horizontal">
+                        
+                        <div class="row">
+                                <div class="col-sm-6">
+                                        <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="linkOnly" name="defaultExampleRadios" onchange="toggleHyperlink()" checked>
+                                                <label class="custom-control-label" for="linkOnly">Url Only</label>
+                                        </div>
+                                                
+                                </div>
+                                                
+                                <div class="col-sm-6">
+                                        <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="hyperlink" name="defaultExampleRadios" onchange="toggleHyperlink()">
+                                                <label class="custom-control-label" for="hyperlink">Hyperlink</label>
+                                        </div>
+                                </div>
+                        </div>
+                        <h5></h5>
+                        <div class="row">
+                                        <div class="col-sm-12">
+                                                        <label class="control-label">Name</label>
+                                                        <input type='text' class="form-control"  id='selected'>
+                                        </div>
+                                <div class="col-sm-12">
+                                                <label class="control-label">Link</label>
+                                                <input type='text' class="form-control"  id='href'>
+                                </div>
+                        </div>
+                        <h5></h5>
+                        </div>
+                        <hr>
+                        <p>
+                        </p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn-modal btn-outline-dark" onclick="hyperLinkInsert()" >Insert</button>
+                <button type="button" class="btn-modal btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+                </div>
+        </div>
+
+        <!-- Image Modal -->
+        <div class="modal fade" id="InsertPic" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Choose Your Image</h4>
+                        </div>
+                        <div class="modal-body">
+                                <div class="form-horizontal">
+                                
+                                <div class="row">
+                                        <div class="col-sm-12">
+                                                <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="local" name="defaultExampleRadios" onchange="ToggeleImg()" checked>
+                                                        <label class="custom-control-label" for="local">Local File</label>
+                                                </div>
+                                                        
+                                        </div>
+                                                        
+                                        <div class="col-sm-12">
+                                                <label class="control-label"></label>
+                                                <input type='file' class="form-control"  id='imgfile' onchange="GetImgLink(event)" accept="image/jpeg, image/png, image/gif">
+                                        </div>
+                                </div>
+                                <h5></h5>
+                                <div class="row">     
+                                        <div class="col-sm-12">
+                                                <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="link" name="defaultExampleRadios" onchange="ToggeleImg()">
+                                                        <label class="custom-control-label" for="link">Link</label>
+                                                </div>
+
+                                        </div>
+                                        <div class="col-sm-12">
+                                                        <label class="control-label"></label>
+                                                        <input type='text' class="form-control"  id='address'>
+                                        </div>
+                                </div>
+                                <h5></h5>
+                                <div class="row">
+                                        <div class="col-sm-6">
+                                                <label class="control-label">Width</label>
+                                                <input type='number' class="form-control"  id='width'>
+                                        </div>
+                                        <div class="col-sm-6">
+                                                <label class="control-label">Height</label>
+                                                <input type='number' class="form-control"  id='height'>
+                                        </div>
+
+                                </div>
+                                <span class="text-danger" id='validation'></span>
+                                </div>
+                                <hr>
+                                <p class="info">
+                                        <i class="glyphicon glyphicon-info-sign" style="color:#008df5; "></i> &nbsp; For Orginal Size Leave Width & Height Blank .
+                                </p>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn-modal btn-outline-dark" onclick="InsertImg()" >Insert</button>
+                        <button type="button" class="btn-modal btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+                        </div>
+        </div>
+
+        <!--Video Modal -->
+        <div class="modal fade" id="InsertVideo" role="dialog">
+                <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Paste Your Video Link</h4>
+                </div>
+                <div class="modal-body">
+                        <div class="form-horizontal">
+                        <h5></h5>
+                        <div class="row">     
+                                <div class="col-sm-12">
+                                                <label class="control-label">Link </label>
+                                                <input type='text' class="form-control"  id='VideoAddress'>
+                                </div>
+                        </div>
+                        <h5></h5>
+                        <div class="row">
+                                <div class="col-sm-6">
+                                        <label class="control-label">Width</label>
+                                        <input type='number' class="form-control"  id='VideoWidth'>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label class="control-label">Height</label>
+                                        <input type='number' class="form-control"  id='VideoHeight'>
+                                </div>
+
+                        </div>
+                        <span class="text-danger" id='validation'></span>
+                        </div>
+                        <hr>
+                        <p class="info">
+                                <i class="glyphicon glyphicon-info-sign" style="color:#008df5; "></i> &nbsp; If Width or Height is Blank Then The Default Value is 350 (width) & 300 (Height).
+                        </p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn-modal btn-outline-dark" onclick="InsertVideo()" >Insert</button>
+                <button type="button" class="btn-modal btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+                </div>
+        </div>
+</div>
+
+<script src="Script/RichEditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.min.js"></script>
+
+<style>
+        @media (max-width: 576px) { 
+                .Toxy-TextEditor{
+                        width: 100% !important;
+                }
+                .navbar-brand{
+                        float: none;
+                }
+                .navbar-header{
+                        text-align: center;
+                        padding: 15px 15px;
+                }
+                .Toxy-toolbar{
+                        border: 1px solid #f97402 !important;
+                }
+                .text-area{
+                        border: 1px solid #f97402 !important;
+                }
+         }
+
+
+
+
+.wrap {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #008df5;
+    border-radius: 5px;
+    z-index: 5555;
+    overflow: hidden;
+}
+.on-Active {
+        color: #fff;
+    background-color: #008df5 !important;
+    border-color: #008df5 !important;
+}
+div.wrap > div:nth-child(1) > div.col-sm-2.align-toolbar > p {
+    border: none;
+}
+.toolbar{
+        background-color: rgba(150, 150, 150, 0.20); 
+        text-align: center;
+        padding: 0;
+}
+.align-toolbar{
+        padding: 0;
+        padding-bottom: 10px;
+}
+.tooltip.top .tooltip-inner {
+    color: black;
+    background-color: #cecece;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+.info{
+        text-align: center;
+        padding: 15px 20px;
+        margin:0;
+}
+        .navbar-default {
+    background-color: #eaeaea;
+    border-color: #f9740269;
+}
+    .Toxy-TextEditor{
+        width:80%;
+        margin: 0 auto;
+        position: relative;
+    }
+    .Toxy-toolbar{
+        background-color: rgba(150, 150, 150, 0.20);
+        border:none;
+        border-bottom: 1px solid #f97402;
+    border-top: 1px solid #f97402;
+
+    }
+    p.sub-heading {
+        padding: 0.2em 0;
+    text-align: center;
+    background: #008df5;
+    color: white;
+    font-weight: bold;
+    border-right: 1px solid;
+}
+.form-group{
+        text-align: center;
+}
+.select-div {
+    position: relative;
+    display: inline-block;
+    margin: 0.3em 0;
+    padding: 4px 4px !important;
+    border: 1px solid #f97402;
+    font-size: 0.9em;
+    line-height: 1em;
+    border-color: #bbb6b6;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 0px #CCC;
+}
+.btn-select {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background: transparent;
+    border: none;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+.btn-select> option{
+    color: black;
+}
+
+.text-area{
+    position: relative;
+    height: 100%;
+    padding:15px; 
+    resize: both;
+  overflow: auto;
+  border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+.btn-modal{
+        display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.modal-header{
+        background: #008df5;
+        color:white;
+}
+.btn{
+        padding: 5px 6px !important;
+        width: 2.1em;
+        height: 2.1em;
+}
+.btn-outline-dark{  
+    margin: 0.2em 0;
+    background-color: transparent;
+    background-image: none;
+    border-color: #bbb6b6;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 0px #CCC;
+}
+.btn-outline-dark:hover{
+    color: #fff;
+    background-color: #008df5;
+    border-color: #008df5;
+    
+}
+.select-div:hover{
+    color: #fff;
+    background-color: #008df5;
+    border-color: #008df5;
+    
+}
+.text-size-icon {
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+</style>
